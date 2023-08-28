@@ -1,12 +1,16 @@
 package spring.core;
 
-import spring.core.member.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import spring.core.member.Grade;
+import spring.core.member.Member;
+import spring.core.member.MemberService;
 
 public class MemberApp {
 
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = context.getBean("memberService", MemberService.class);
 
         Member member = new Member(1L, "yuri", Grade.VIP);
         memberService.join(member);
